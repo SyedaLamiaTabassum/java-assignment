@@ -10,21 +10,57 @@ import java.util.Scanner;
 
 public class Bazar_list {
     public static void main(String[] args) {
-        HashMap hashMap = new HashMap();
-        hashMap.put("rice",350);
-        hashMap.put("potato",100);
-        hashMap.put("onion",35);
-        hashMap.put("flour",150);
-        hashMap.put("battery",50);
-
+        Bazar_list bazarList = new Bazar_list();
         Scanner sc = new Scanner(System.in);
         System.out.println("enter a product name: ");
         String p = sc.next();
-        System.out.println(hashMap.get(p));
+        String message = bazarList.searchItem(p);
+        int TotalPrice = bazarList.totalSum();
+        if (message == "No item found")
+        {
+            System.out.println(message);
+        }
+        else
+        {
+            System.out.println("price of " + p + " is " + message );
+        }
+        System.out.println("total price is "+ TotalPrice);
     }
+    public int totalSum()
+    {
+        HashMap list = list();
+        int total = 0;
+        Object [] priceArray = list.values().toArray();
+
+        for (int i=0; i<priceArray.length; i++)
+        {
+            total+=Integer.parseInt(priceArray[i].toString()); //object type array cast to int for the case of numerical text //
+        }
+        return total;
+    }
+
     public String searchItem(String p )
     {
-     String  product = );
-     return product;
+        HashMap list = list();
+        if (list.containsKey(p))
+        {
+            String price = list.get(p).toString();
+            return price;
+        }
+        else
+        {
+            return "No item found";
+        }
+    }
+
+    public HashMap list()
+    {
+        HashMap list = new HashMap();
+        list.put("rice",350);
+        list.put("potato",100);
+        list.put("onion",35);
+        list.put("flour",150);
+        list.put("battery",50);
+        return list;
     }
 }
